@@ -1,0 +1,31 @@
+dist: focal
+
+addons:
+  sonarcloud:
+    organization: "onune5mgafygrs6rbwhf5hwvm0kfx5s1"
+    token:
+      secure: "tubvcbjAe5bfkjldWYwfi6ORnXOxklE7k0HRMe/7EPXh5hxL4GpQPM1vkcFIX+gt0JmhJMfl7MUatqb0Dh+K/PAhTqQHEeT7Hpar9g/Ufv7xtAd/o1ZhO3iqYXG++m/6HeNicD3qB4o4sFhQYVFSP7XEfWVG1MNCQzEmQXtRtmBag40sUVDy4U0Vr14e1REdwBAttv6v2gdTozDhpIZps9ujOMx4QBXC0SBzSSTmrj4gh9h7ptSOUA/9VZuubl61G75JN2d/71zBtk0C3+JpDRPIV4H60v8QeU4RUsbeaz0sjbEzjOdnAxmFWzcnrXl6hf9GMVBui4yjlkOPPPZXM4/BP9DNE1tWKRG8ODM+vh+63+tymMxZd9MCHFD5DictEL6WHSFA+B0XjTjmN8mFjeSsWTNsa8RJVUOyimJP5BSRbcwO4XJYkiCtyaehfez2fcjxac4BCcPJUSCZWwO8eBDzyfT5wiFykF4XYnXOp0WKjHLEWINZl+zGkfmiNPdc8teBMPobLxZpOB7VLADED0iORw7t3A7F3N7BDsXD9aY9XLJW+IfZZaLM1cyrp5NuhpOq0dzUWMtWaeGabFTpJBKW2ezd2+qqDKroxqHEm+CfTxoe6ZjB6EXse9CVvkYglwPENQglCtnlnAC+S2h6MCd3QSf4X/7SejvPuWvkR+c="
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
+# This enables the 'defaults' to test java applications:
+language: java
+
+# We can specify a list of JDKs to be used for testing
+# A list of available JDKs in Trusty can be seed in:
+# https://docs.travis-ci.com/user/reference/xenial/#jvm-clojure-groovy-java-scala-support
+jdk:
+ - openjdk11
+
+# Each job in Travis CI has several steps:
+# https://docs.travis-ci.com/user/job-lifecycle/
+# The 'language: java' directive sets up sane defaults to test common java applications
+# We use the defaults for installing dependencies, compiling and testing maven applications
+# In our case it will be 'mvn install' followed by 'mvn test'
+
+# This is to enable CodeCov's coverage
+# If a build is successful, the code is submitted for coverage analysis
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
