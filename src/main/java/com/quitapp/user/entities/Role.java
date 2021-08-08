@@ -1,5 +1,7 @@
 package com.quitapp.user.entities;
 
+import com.quitapp.user.enums.RoleType;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,14 @@ public class Role {
     private UUID externalId;
     @OneToMany(mappedBy = "role")
     private List<User> user = new ArrayList<>();
+
+    public Role() {
+        externalId = UUID.randomUUID();
+    }
+    public Role(RoleType name) {
+        externalId = UUID.randomUUID();
+        this.name = name.toString();
+    }
 
     public Long getId() {
         return id;

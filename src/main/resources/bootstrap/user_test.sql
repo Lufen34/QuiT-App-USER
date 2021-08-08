@@ -1,0 +1,1 @@
+insert into user(id, main_character_name, registration_date, external_id, client_id, client_secret, access_token) VALUES(1, "Pypy Rhorhos",  CURRENT_TIMESTAMP, "0000-0000-0000", "client_id", "secret_generated","ffdsdvsvsdvgsdvdsvdsvdsvd<vsbgsdhbgs");
